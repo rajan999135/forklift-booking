@@ -12,15 +12,27 @@ class EnsureOtpVerified
     {
         $user = $request->user();
 
-        if ($user && is_null($user->email_verified_at)) {
-            // If they're already on the OTP page or resend route, let them through
-            if ($request->routeIs('otp.show') || $request->routeIs('otp.send') || $request->routeIs('otp.verify')) {
-                return $next($request);
-            }
-
-            return redirect()->route('otp.show');
+        // Not logged in — skip
+        if (!$user) {
+            return $next($request);
         }
 
-        return $next($request);
+        // ✅ Admin users skip OTP entirely
+        if ($user->role === 'admin') {
+            return $next($request);
+        }
+
+        // Already verified — no problem
+        if (!is_null($user->email_verified_at)) {
+            return $next($request);
+        }
+
+        // On OTP related routes — let through
+        if ($request->routeIs('otp.*')) {
+            return $next($request);
+        }
+
+        // Regular user not verified — send to OTP page
+        return redirect()->route('otp.show');
     }
 }
