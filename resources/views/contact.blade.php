@@ -30,6 +30,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @vite(["resources/css/app.css","resources/js/app.js"])
   <title>Contact Support • Forklift Booking</title>
   <!-- Remove this CDN if your app already loads Tailwind via Vite -->
  
