@@ -17,6 +17,7 @@ class Forklift extends Model
          'gallery_images',         // ["forklifts/a.jpg", ...]
         'location_id',
         'features',
+        'status',
     ];
 
     protected $casts = [
