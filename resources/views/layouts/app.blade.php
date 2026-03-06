@@ -12,7 +12,7 @@
   @vite(['resources/css/app.css','resources/js/app.js'])
 
   {{-- Tailwind CSS via CDN (optional if you already compile Tailwind via Vite) --}}
-  <script src="https://cdn.tailwindcss.com"></script>
+ 
 
   {{-- FullCalendar via CDN (keep one version app-wide) --}}
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">

@@ -32,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Support • Forklift Booking</title>
   <!-- Remove this CDN if your app already loads Tailwind via Vite -->
-  <script src="https://cdn.tailwindcss.com"></script>
+ 
 </head>
 <body class="bg-zinc-50 text-zinc-900">
 
