@@ -13,23 +13,23 @@ class Forklift extends Model
         'name',
         'capacity_kg',
         'hourly_rate',   // decimal(10,2)
-        'image',         // e.g. "forklifts/abc.jpg"
-        'images',        // ["forklifts/a.jpg", ...]
+        'main_image',      // ← was 'image'
+         'gallery_images',         // ["forklifts/a.jpg", ...]
         'location_id',
         'features',
     ];
 
     protected $casts = [
-        'capacity_kg' => 'integer',
-        'hourly_rate' => 'decimal:2',
-        'images'      => 'array',
-    ];
+    'capacity_kg'     => 'integer',
+    'hourly_rate'     => 'decimal:2',
+    'gallery_images'  => 'array',  // ← was 'images'
+];
 
     // expose computed fields
     protected $appends = ['image_url', 'images_urls', 'formatted_hourly_rate'];
 
     // keep raw paths hidden if you ever return the model as JSON
-    protected $hidden = ['image', 'images'];
+    protected $hidden = ['main_image', 'gallery_images']; 
 
     /* ---------- Relationships ---------- */
 
@@ -82,54 +82,30 @@ class Forklift extends Model
         return asset($clean);
     }
 
-    /* ---------- Accessors ---------- */
-
-    // public function getImageUrlAttribute(): ?string
-    // {
-    //     // Prefer primary image; else first in gallery
-    //     $path = $this->image ?: ($this->images[0] ?? null);
-    //     return static::toPublicUrl($path);
-    // }
-
-    // public function getImagesUrlsAttribute(): array
-    // {
-    //     $paths = is_array($this->images) ? $this->images : [];
-    //     if ($this->image && !in_array($this->image, $paths, true)) {
-    //         array_unshift($paths, $this->image);
-    //     }
-
-    //     return collect($paths)
-    //         ->map(fn ($p) => static::toPublicUrl($p))
-    //         ->filter()
-    //         ->values()
-    //         ->all();
-    // }
+    
     public function getImageUrlAttribute(): ?string
 {
-    if (! $this->image) {
+    if (!$this->main_image) {  // ← was $this->image
         return null;
     }
-
-    // DB: "forklifts/abc123.jpg" → URL: "/storage/forklifts/abc123.jpg"
-    return asset('storage/' . ltrim($this->image, '/'));
+    return asset('storage/' . ltrim($this->main_image, '/'));
 }
 
 public function getImagesUrlsAttribute(): array
 {
     $urls = [];
 
-    // If images column is an array/json of paths
-    if (is_array($this->images)) {
-        foreach ($this->images as $img) {
+    if (is_array($this->gallery_images)) {  // ← was $this->images
+        foreach ($this->gallery_images as $img) {
             if ($img) {
                 $urls[] = asset('storage/' . ltrim($img, '/'));
             }
         }
     }
 
-    // Make sure main image is first in the list
-    if ($this->image) {
-        array_unshift($urls, asset('storage/' . ltrim($this->image, '/')));
+    // Main image always first
+    if ($this->main_image) {  // ← was $this->image
+        array_unshift($urls, asset('storage/' . ltrim($this->main_image, '/')));
     }
 
     return $urls;
