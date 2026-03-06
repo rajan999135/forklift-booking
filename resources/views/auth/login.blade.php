@@ -239,9 +239,9 @@
                 <div>
                     <h3 class="font-bold text-lg mb-4">Get in Touch</h3>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li>📧 support@forkliftbooking.com</li>
-                        <li>📞 1-800-FORKLIFT</li>
-                        <li>📍 123 Warehouse District, Industrial City</li>
+                        <li>📧 rajannanda123456@gmail.com</li>
+                        <li>📞 1-306-351-4149</li>
+                        <li>📍 Regina, SK, CA</li>
                     </ul>
                 </div>
             </div>
