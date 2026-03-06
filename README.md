@@ -2,7 +2,7 @@
 
 > A production-grade forklift rental booking system with real-time availability, online payments, and a full admin dashboard — built with Laravel 12 and deployed to a live server.
 
-🌐 **Live Demo:** [View Live](https://lnkd.in/gyxqZSSA) &nbsp;|&nbsp; 📂 **GitHub:** [Source Code](https://lnkd.in/gZWKtu4U)
+🌐 **Live Demo:** [View Live](https://forklift.rajanandadev.com) &nbsp;|&nbsp; 
 
 ---
 
